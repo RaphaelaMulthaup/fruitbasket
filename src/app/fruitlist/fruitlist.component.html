@@ -1,42 +1,5 @@
 <div class="fruitlist_content">
-  @for(item of fruitlist; track item.name){
-  <section class="singleFruitBox">
-    <div>
-      <img src="./assets/img/fruits/{{ item.img }}" alt="" srcset="" />
-    </div>
-    <div>
-      <h2>{{ item.name }}</h2>
-      <div>
-        <p><b>Bewertung:</b></p>
-        <div>
-          @for (num of [1, 2, 3, 4, 5]; track num; let index = $index) { @switch
-          (true) { @case (item.stars >= index + 1) {
-          <img src="./assets/img/stars/star.svg" alt="" srcset="" />
-          } @case (item.stars <= index) {
-          <img src="./assets/img/stars/star-empty.svg" alt="" srcset="" />
-          } @default {
-          <img src="./assets/img/stars/star-half.svg" alt="" srcset="" />
-          } } }
-          <p [ngClass]="{'fontColorBad': item.stars < 3, 'fontColorGood': item.stars >= 3}">({{ item.stars }})</p>
-        </div>
-      </div>
-      <div><b>Art:</b><br />{{ item.genus }}</div>
-      <div><b>Beschreibung:</b><br />{{ item.description }}</div>
-      <div>
-        <div>
-          @for (review of item.reviews; track review; let index = $index) {
-          <div>
-            <b>{{ review.name }}:</b><br />{{ review.text }}
-          </div>
-          } @empty { Schreib den ersten Kommentar! }
-        </div>
-        <div>
-          <input type="text" /><button>
-            <img src="./assets/img/arrow-35-32.png" alt="" srcset="" />
-          </button>
-        </div>
-      </div>
-    </div>
-  </section>
+  @for(singlefruit of fruitlist; track singlefruit.name; let index = $index){
+    <app-single-fruit (fruitname)="addComment($event,index)" [fruit]="singlefruit"></app-single-fruit>
   }
 </div>

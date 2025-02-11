@@ -1,0 +1,39 @@
+<section class="singleFruitBox">
+    <div>
+      <img src="./assets/img/fruits/{{ fruit.img }}" alt="" srcset="" />
+    </div>
+    <div>
+      <h2>
+        {{ fruit.name }}</h2>
+      <div>
+        <p><b>Bewertung:</b></p>
+        <div>
+          @for (num of [1, 2, 3, 4, 5]; track fruit; let index = $index) { @switch
+          (true) { @case (fruit.stars >= index + 1) {
+          <img src="./assets/img/stars/star.svg" alt="" srcset="" />
+          } @case (fruit.stars <= index) {
+          <img src="./assets/img/stars/star-empty.svg" alt="" srcset="" />
+          } @default {
+          <img src="./assets/img/stars/star-half.svg" alt="" srcset="" />
+          } } }
+          <p>({{ fruit.stars }})</p>
+        </div>
+      </div>
+      <div><b>Art:</b><br />{{ fruit.genus }}</div>
+      <div><b>Beschreibung:</b><br />{{ fruit.description }}</div>
+      <div>
+        <div>
+          @for (review of fruit.reviews; track review; let index = $index) {
+          <div>
+            <b>{{ review.name }}:</b><br />{{ review.text }}
+          </div>
+          } @empty { Schreib den ersten Kommentar! }
+        </div>
+        <div>
+          <input [(ngModel)]="inputData" type="text" /><button>
+            <img (click)="sendInputData()" src="./assets/img/arrow-35-32.png" alt="" srcset="" />
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
